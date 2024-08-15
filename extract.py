@@ -1,7 +1,6 @@
 # Global Power Plant Database 중 Solar, Wind 데이터만 추출
 
 import pandas as pd
-import numpy as np
 
 def extract(df):
     required_columns = ['latitude', 'longitude', 'primary_fuel']
@@ -13,7 +12,7 @@ def extract(df):
 
 # Main execution
 if __name__ == "__main__":
-    df = pd.read_csv("power_plant.csv")
+    df = pd.read_csv("dataset/power_plant.csv")
     result_df = extract(df)
     print(result_df.head())
-    result_df.to_csv('extracted.csv', index=False)
+    result_df.to_csv('dataset/extracted_others.csv', index=False)

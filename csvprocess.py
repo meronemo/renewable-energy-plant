@@ -4,9 +4,9 @@ import pandas as pd
 
 # csv 파일에 energy 라벨 붙이기
 def label():
-    df = pd.read_csv('dataset/wind_dataset_2.csv')
-    df['energy'] = 'wind'
-    df.to_csv('dataset/wind_dataset_2.csv', index=False)
+    df = pd.read_csv('dataset/extracted_others.csv')
+    df['energy'] = 'others'
+    df.to_csv('dataset/extracted_others.csv', index=False)
 
 # 두 csv 하나로 합치기
 def combine():
@@ -26,6 +26,11 @@ def sample(cnt):
     combined_data = pd.concat([solar_sample, wind_sample])
     combined_data.to_csv('dataset/dataset.csv', index=False)
 
+# 한 csv에서 cnt개 샘플
+def sample2(cnt):
+    data = pd.read_csv('dataset/extracted_others.csv')
+    data_sample = data.sample(n=cnt, random_state=1)
+    data_sample.to_csv('dataset/extracted_others.csv', index=False)
+
 if __name__ == '__main__':
     label()
-    combine()

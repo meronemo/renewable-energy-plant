@@ -1,0 +1,8 @@
+# Get the latest image
+docker pull ghcr.io/open-meteo/open-meteo
+
+# Create a Docker volume to store weather data
+docker volume create --name open-meteo-data
+
+# Start the API service on http://127.0.0.1:8080
+docker run -d --rm -v open-meteo-data:/app/data -p 8080:8080 ghcr.io/open-meteo/open-meteo

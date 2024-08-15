@@ -38,7 +38,7 @@ def process_data(data):
     monthly_data = merged_df.set_index('date').resample('ME').mean().reset_index()
     return monthly_data
 
-data = pd.read_csv("dataset/wind.csv")
+data = pd.read_csv("dataset/others.csv")
 
 end_date = datetime.now()
 start_date = end_date - timedelta(days=365)
@@ -47,12 +47,13 @@ columns = ['maxrad', 'minrad', 'meanrad', 'maxdur', 'mindur', 'meandur', 'maxwin
 completed = pd.DataFrame(columns=columns)
 
 
-# Solar 1~3000번째까지 완료
-# Wind 1~2892번째까지 완료
+# Solar 1~5300번째까지 완료
+# Wind 1~5300번째까지 완료
+# Others
 
 for i, row in enumerate(data.itertuples(), start=1):
-    if i < 1127: continue
-    if i == 3001: break
+    if i <= -1: continue
+    if i == 5301: break
     lat = row.latitude
     long = row.longitude
     print(i, lat, long)
@@ -78,4 +79,4 @@ for i, row in enumerate(data.itertuples(), start=1):
         print(e)
         break
 
-completed.to_csv('dataset/wind_dataset_2.csv', index=False)
+completed.to_csv('dataset/others_dataset.csv', index=False)
