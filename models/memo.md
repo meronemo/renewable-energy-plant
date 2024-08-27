@@ -49,9 +49,45 @@ grid_search = {'max_depth': range(1, 50, 2),
 최적 파라미터: {'max_depth': 13, 'min_samples_leaf': 2, 'min_samples_split': 3} Accuracy: 0.8796666666666667
 
 # 5 (Random Forest)
+Accuracy: 0.9257
+Confusion Matrix
+[[1395  106]
+ [ 117 1382]]
+Classification Report
+              precision    recall  f1-score   support
+
+       solar       0.92      0.93      0.93      1501
+        wind       0.93      0.92      0.93      1499
+
+    accuracy                           0.93      3000
+   macro avg       0.93      0.93      0.93      3000
+weighted avg       0.93      0.93      0.93      3000
+
+# 6 (Random Forest + Hyperparameter Tuning)
+grid_search = {
+        'max_depth': [3,5,7,10],
+        'n_estimators': [100, 200, 300, 400, 500],
+        'max_features': [10, 20, 30, 40],
+        'min_samples_leaf': [1, 2, 4]
+    }
+{'max_depth': 10, 'max_features': 10, 'min_samples_leaf': , 'n_estimators': 500} 0.9133333333333333
 
 
+param_distributions = {
+        'n_estimators': range(10, 201),
+        'max_depth': range(3, 51),
+        'min_samples_split': range(2, 21),
+        'min_samples_leaf': range(1, 21),
+        'max_features': ['None', 'sqrt', 'log2'],
+        'criterion': ['gini', 'entropy'],
+    }
+{'n_estimators': 138, 'min_samples_split': 6, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': 33, 'criterion': 'entropy'} 0.9243333333333333
 
+param_distributions = {'bootstrap': [True, False],
+    'max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None],
+    'max_features': ['auto', 'sqrt'],
+    'min_samples_leaf': [1, 2, 4],
+    'min_samples_split': [2, 5, 10],
+    'n_estimators': [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]}
+{'n_estimators': 800, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None, 'bootstrap': False} 0.925
 
-정확도 개선 위해 feature selection 고려
-완성 후 feature importance 그래프 그려보는 것도 좋을듯

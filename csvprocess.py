@@ -24,7 +24,7 @@ def sample(cnt):
     wind_sample = wind_data.sample(n=cnt, random_state=1)
 
     combined_data = pd.concat([solar_sample, wind_sample])
-    combined_data.to_csv('dataset/dataset.csv', index=False)
+    combined_data.to_csv('dataset/100_dataset.csv', index=False)
 
 # 한 csv에서 cnt개 샘플
 def sample2(cnt):
@@ -33,4 +33,4 @@ def sample2(cnt):
     data_sample.to_csv('dataset/extracted_others.csv', index=False)
 
 if __name__ == '__main__':
-    label()
+    sample(100)
