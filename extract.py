@@ -10,7 +10,6 @@ def extract(df):
     solar_wind_df_sorted = solar_wind_df.sort_values(by='primary_fuel')
     return solar_wind_df_sorted
 
-# Main execution
 if __name__ == "__main__":
     df = pd.read_csv("dataset/power_plant.csv")
     result_df = extract(df)

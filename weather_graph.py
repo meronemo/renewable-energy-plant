@@ -1,4 +1,4 @@
-# [테스트] 특정 위치 그래프 그리기
+# 특정 위치에 대한 날씨 데이터 그래프 그리기
 
 import requests
 import pandas as pd

@@ -1,4 +1,4 @@
-# 특정 지역 데이터 수집
+# 특정 지역 날씨 데이터 수집
 
 import pandas as pd
 import requests

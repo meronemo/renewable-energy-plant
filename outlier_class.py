@@ -1,14 +1,10 @@
 # 각 특성별 이상치 데이터 포인트와 그의 클래스 확인
 
 import pandas as pd
+from lib.get_data import col_names
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Define column names
-col_names = ['maxrad', 'minrad', 'meanrad', 'maxdur', 'mindur', 'meandur', 
-             'maxwind', 'minwind', 'meanwind', 'elevation', 'energy']
-
-# Read the CSV file correctly
 df = pd.read_csv("dataset/dataset.csv", header=0, names=col_names)
 
 # Function to get numerical columns
