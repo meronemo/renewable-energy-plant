@@ -4,7 +4,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 col_names = ['maxrad', 'minrad', 'meanrad', 'maxdur', 'mindur', 'meandur', 'maxwind', 'minwind', 'meanwind', 'elevation', 'energy']
+# col_names = ['maxrad', 'minrad', 'meanrad', 'maxdur', 'mindur', 'meandur', 'elevation', 'energy']
 feature_cols = ['maxrad', 'minrad', 'meanrad', 'maxdur', 'mindur', 'meandur', 'maxwind', 'minwind', 'meanwind', 'elevation']
+# feature_cols = ['maxrad', 'minrad', 'meanrad', 'maxdur', 'mindur', 'meandur', 'elevation']
 
 def get_data():
     dataset = pd.read_csv("dataset/dataset.csv", header=0, names=col_names)

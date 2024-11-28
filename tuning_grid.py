@@ -12,7 +12,7 @@ def tuning():
         project="meronemo/renewable-energy-plant",
         api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiIzNWE1YWYyZS1lN2ZmLTQ4YmYtOTUzMi1jNjY0ZGNiNzM3NDkifQ==",
         monitoring_namespace="monitoring",
-        tags=["random_forest", "grid_search"]
+        tags=["decision_tree", "grid_search", "test"]
     )
 
     X_train, X_test, y_train, y_test = get_data()
@@ -26,30 +26,36 @@ def tuning():
     }
     '''
 
+    '''
     grid_search = {
         'max_depth': [3,5,7,10],
         'n_estimators': [100, 200, 300, 400, 500],
         'max_features': [10, 20, 30, 40],
         'min_samples_leaf': [1, 2, 4]
     }
-    
-    clf = RandomForestClassifier(random_state=1)
-    grid = GridSearchCV(clf, grid_search, cv=3)
-    grid.fit(X_train, y_train)
-    grid_pf = grid.best_estimator_.predict(X_test)
-    accuracy = accuracy_score(y_test, grid_pf)
-    precision = precision_score(y_test, grid_pf, average='weighted')
-    recall = recall_score(y_test, grid_pf, average='weighted')
-    f1 = f1_score(y_test, grid_pf, average='weighted')
-    print(grid.best_params_, accuracy)
+    '''
 
+    # Grid for Decision Tree Tuning
+    grid_search = {
+        'criterion': ['gini', 'entropy'],
+        'max_depth': list(range(1, 31)),
+        'min_samples_split': [2, 5, 10, 20],
+        'min_samples_leaf': [1, 2, 5, 10]
+    }
+    
+    clf = DecisionTreeClassifier(random_state=1)
+    grid = GridSearchCV(clf, grid_search, cv=5, scoring='accuracy')
+    grid.fit(X_train, y_train)
     # with open("tuning.txt", 'w') as file:
     #     file.write(str(grid.best_params_) + ' ' + str(accuracy))
 
-    run["acc"].append(accuracy)
-    run["precision"].append(precision)
-    run["recall"].append(recall)
-    run["f1"].append(f1)
+    for i, params in enumerate(grid.cv_results_['params']):
+        run[f'grid_search/{i}/params'] = params
+        run[f'grid_search/{i}/mean_test_score'] = grid.cv_results_['mean_test_score'][i]
+        run[f'grid_search/{i}/std_test_score'] = grid.cv_results_['std_test_score'][i]
+    run["best_params"] = grid.best_params_
+    run["best_score"] = grid.best_score_
+
     run.stop()
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-# 데이터셋 구성
+# 날씨 데이터 가져오기 / 데이터셋 구성
 
 import pandas as pd
 import requests
